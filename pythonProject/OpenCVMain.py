@@ -5,10 +5,10 @@ import imutils
 from time import sleep
 
 # название окна подстройки
-WINDOWNAME = "Настройка тона"
+WINDOWNAME = "The Tone Adjusting"
 
 # минимальный размер контуров пятна
-BLOBSIZE = 1500
+BLOBSIZE = 10
 
 # константы насыщенности и яркости
 S_MIN = 29
@@ -18,7 +18,6 @@ V_MAX = 255
 
 # цвет прямоугольника (B, G, R)
 RECTCOLOR = (0, 255, 0)
-
 # толщина линии прямоугольника
 RTHICK = 2
 
@@ -37,8 +36,8 @@ def empty(a):
 frameSize = (320, 240)
 
 # создаём объект видео потока
-vs = VideoStream(src=0, usePiCamera=True, resolution=frameSize, framerate=32).start()
-
+#vs = VideoStream(src=0, usePiCamera=True, resolution=frameSize, framerate=32).start()
+vs = VideoStream(src=0, resolution=frameSize, framerate=20).start()
 # ждём окончания инициализации видеопотока
 sleep(2)
 
@@ -83,7 +82,7 @@ while True:
 
 
             # выводим найденные контуры
-            #cv2.drawContours(image, contours, -1, 255, 1)
+           # cv2.drawContours(image, contours, -1, 255, 5)
 
             # находим контуры бОльшего размера
             c = max(contours, key = cv2.contourArea)
@@ -96,6 +95,7 @@ while True:
 
                 # выводим его
                 cv2.rectangle(image, (x, y), (x+w, y+h), RECTCOLOR, RTHICK)
+
 
         # Показываем картинку с квадратом выделения
         cv2.imshow("Image", image)
